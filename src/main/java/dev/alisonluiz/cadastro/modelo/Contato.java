@@ -1,7 +1,8 @@
 package dev.alisonluiz.cadastro.modelo;
 
 import jakarta.persistence.*;
-import net.minidev.json.annotate.JsonIgnore;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Contato {
@@ -10,10 +11,13 @@ public class Contato {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "O nome do contato é obrigatório")
     private String nome;
 
+    @NotBlank(message = "O telefone do contato não pode ser vazio")
     private String telefone;
 
+    @Email(message = "O e-mail do contato esta inválido")
     private String email;
 
     public Long getId() {
