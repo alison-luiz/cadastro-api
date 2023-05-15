@@ -1,12 +1,13 @@
 package dev.alisonluiz.cadastro.modelo;
 
 import jakarta.persistence.*;
+import net.minidev.json.annotate.JsonIgnore;
 
 @Entity
 public class Contato {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String nome;
@@ -14,10 +15,6 @@ public class Contato {
     private String telefone;
 
     private String email;
-
-    @ManyToOne
-    @JoinColumn(name = "pessoa_id")
-    private Pessoa pessoa;
 
     public Long getId() {
         return id;
@@ -51,11 +48,4 @@ public class Contato {
         this.email = email;
     }
 
-    public Pessoa getPessoa() {
-        return pessoa;
-    }
-
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
-    }
 }

@@ -3,14 +3,13 @@ package dev.alisonluiz.cadastro.modelo;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 public class Pessoa {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String nome;
@@ -19,8 +18,8 @@ public class Pessoa {
 
     private LocalDate dataNascimento;
 
-    @OneToMany(mappedBy = "pessoa", fetch = FetchType.LAZY)
-    private List<Contato> contatos = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Contato> contatos;
 
     public Long getId() {
         return id;
@@ -61,4 +60,5 @@ public class Pessoa {
     public void setContatos(List<Contato> contatos) {
         this.contatos = contatos;
     }
+
 }
