@@ -70,7 +70,7 @@ Arquivo disponível do postman para GET, POST, PUT e DELETE
 #### Request
 
 - **URL**: `/api/pessoas/{id}`
-- **Method**: GET
+- Method: `GET`
 
 ### Editar Pessoa
 
