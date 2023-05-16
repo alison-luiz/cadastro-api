@@ -24,14 +24,14 @@ public class PessoaController {
         this.pessoaRepositorio = pessoaRepositorio;
     }
 
-    @GetMapping
-    public ResponseEntity<Object> listarPessoas() {
-        List<Pessoa> pessoas = pessoaRepositorio.findAll();
+    @GetMapping("/buscar")
+    public ResponseEntity<Object> listarPessoas(@RequestParam(required = false) String nome,@RequestParam(required = false) String cpf) {
+        List<Pessoa> pessoas = pessoaRepositorio.findAllByParams(nome, cpf);
         return ResponseEntity.ok(pessoas);
     }
 
-    @GetMapping("/id={id}")
-    public ResponseEntity<Pessoa> lerId(@PathVariable Long id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<Pessoa> buscarPorId(@PathVariable Long id) {
         Optional<Pessoa> pessoa = pessoaRepositorio.findById(id);
         if (pessoa.isPresent()) {
             return ResponseEntity.ok(pessoa.get());
@@ -54,12 +54,20 @@ public class PessoaController {
             return ResponseEntity.badRequest().body("É necessário fornecer pelo menos um contato.");
         }
 
+        if (pessoaRepositorio.existsByCpf(pessoa.getCpf())) {
+            return ResponseEntity.badRequest().body("Este CPF já esta cadastrado.");
+        }
+
         Pessoa salvarPessoa = pessoaRepositorio.save(pessoa);
         return ResponseEntity.ok(salvarPessoa);
     }
 
-    @PutMapping("/id={id}")
-    public ResponseEntity<Pessoa> atualizarPessoa(@PathVariable Long id, @RequestBody Pessoa pessoa) {
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> atualizarPessoa(@PathVariable Long id, @Valid @RequestBody Pessoa pessoa) {
+        if (pessoa.getContatos() == null || pessoa.getContatos().isEmpty()) {
+            return ResponseEntity.badRequest().body("É necessário fornecer pelo menos um contato.");
+        }
+
         Optional<Pessoa> temPessoa = pessoaRepositorio.findById(id);
         if (temPessoa.isPresent()) {
             Pessoa atualizarPessoa = temPessoa.get();
@@ -75,9 +83,10 @@ public class PessoaController {
         } else {
             return ResponseEntity.notFound().build();
         }
+
     }
 
-    @DeleteMapping("/id={id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletarPessoa(@PathVariable Long id) {
         Optional<Pessoa> optionalPessoa = pessoaRepositorio.findById(id);
         if (optionalPessoa.isPresent()) {
