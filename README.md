@@ -63,13 +63,13 @@ Arquivo disponível do postman para GET, POST, PUT e DELETE
 
 - URL: `/api/pessoas/buscar`
 - Method: `GET`
-- **Parâmetros de consulta**: 
+- Parâmetros de consulta: 
   - `nome`
   - `cpf`
 
 #### Request
 
-- **URL**: `/api/pessoas/{id}`
+- URL: `/api/pessoas/{id}`
 - Method: `GET`
 
 ### Editar Pessoa
