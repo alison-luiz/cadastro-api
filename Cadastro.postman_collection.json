@@ -12,7 +12,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/pessoas/buscar?nome=Alison&cpf=339",
+					"raw": "http://localhost:8080/api/pessoas/buscar",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -26,11 +26,13 @@
 					"query": [
 						{
 							"key": "nome",
-							"value": "Alison"
+							"value": "Alison",
+							"disabled": true
 						},
 						{
 							"key": "cpf",
-							"value": "339"
+							"value": "339",
+							"disabled": true
 						}
 					]
 				}
@@ -152,7 +154,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nome\": \"Alison Luiz da Silva\",\r\n    \"cpf\": \"339.458.740-84\",\r\n    \"dataNascimento\": \"1998-06-24\",\r\n    \"contatos\": [\r\n        {\r\n            \"nome\": \"João\",\r\n            \"telefone\": \"44997267963\",\r\n            \"email\": \"contato3@gmail.com\"\r\n        }\r\n    ]\r\n}",
+					"raw": "{\r\n    \"nome\": \"Alison Luiz da Silva\",\r\n    \"cpf\": \"339.458.740-84\",\r\n    \"dataNascimento\": \"1998-06-24\",\r\n    \"contatos\": [\r\n        {\r\n            \"nome\": \"João\",\r\n            \"telefone\": \"44997267963\",\r\n            \"email\": \"contato1@gmail.com\"\r\n        }\r\n    ]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -160,7 +162,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/pessoas/i1",
+					"raw": "http://localhost:8080/api/pessoas/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -169,7 +171,7 @@
 					"path": [
 						"api",
 						"pessoas",
-						"i1"
+						"1"
 					]
 				}
 			},
